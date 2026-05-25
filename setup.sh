@@ -90,10 +90,12 @@ PLIST_PATH="$HOME/Library/LaunchAgents/${PLIST_LABEL}.plist"
 
 info "Creating launchd plist at $PLIST_PATH..."
 
-ENV_VARS="        <key>AGENT_MODEL</key>
+ENV_VARS="        <key>HOME</key>
+        <string>$HOME</string>
+        <key>AGENT_MODEL</key>
         <string>composer-2.5-fast</string>
         <key>PATH</key>
-        <string>/usr/local/bin:/usr/bin:/bin:/opt/homebrew/bin</string>"
+        <string>$HOME/.local/bin:/usr/local/bin:/usr/bin:/bin:/opt/homebrew/bin</string>"
 
 if [ -n "$GITHUB_REPO" ]; then
   ENV_VARS="$ENV_VARS

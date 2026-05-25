@@ -46,10 +46,12 @@ Create a file at `~/Library/LaunchAgents/com.qa-agent-watcher.myproject.plist`:
 
     <key>EnvironmentVariables</key>
     <dict>
+        <key>HOME</key>
+        <string>/Users/yourname</string>
         <key>AGENT_MODEL</key>
         <string>composer-2.5-fast</string>
         <key>PATH</key>
-        <string>/usr/local/bin:/usr/bin:/bin:/opt/homebrew/bin</string>
+        <string>/Users/yourname/.local/bin:/usr/local/bin:/usr/bin:/bin:/opt/homebrew/bin</string>
     </dict>
 
     <key>StandardOutPath</key>

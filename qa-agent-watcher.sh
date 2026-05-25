@@ -22,7 +22,7 @@ fi
 # ── Configuration ────────────────────────────────────────────────────
 MODEL="${AGENT_MODEL:-composer-2.5-fast}"
 DEFAULT_BRANCH="master"
-LOCKFILE="/tmp/qa-agent-watcher-$(echo "$WORKSPACE" | md5 -q).lock"
+LOCKFILE="/tmp/qa-agent-watcher-$(printf '%s' "$WORKSPACE" | shasum -a 256 | cut -c1-12).lock"
 LOG_PREFIX="[qa-agent-watcher]"
 REQUIRED_LABELS="qa-verified,ready-for-agent"
 
@@ -136,6 +136,7 @@ slugified_title=$(printf '%s' "$ISSUE_TITLE" | tr '[:upper:]' '[:lower:]' | sed 
 BRANCH_NAME="fix/${ISSUE_NUMBER}/${slugified_title}"
 
 log "Creating branch: $BRANCH_NAME"
+git branch -D "$BRANCH_NAME" 2>/dev/null || true
 git checkout -b "$BRANCH_NAME"
 
 # ── Build agent command ──────────────────────────────────────────────

@@ -49,10 +49,10 @@ else
   check "agent (Cursor CLI)" "not found — ensure Cursor CLI is installed and on PATH"
 fi
 
-if command -v md5 &> /dev/null; then
-  check "md5 (macOS)" "ok"
+if command -v shasum &> /dev/null; then
+  check "shasum" "ok"
 else
-  check "md5" "not found — expected on macOS"
+  check "shasum" "not found — expected on macOS"
 fi
 
 # ── Authentication ───────────────────────────────────────────────────
