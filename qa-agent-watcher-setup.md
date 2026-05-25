@@ -2,7 +2,7 @@
 
 ## Prerequisites
 
-On the Mac Mini, ensure the following are installed and authenticated:
+On the host machine, ensure the following are installed and authenticated:
 
 ```bash
 # Cursor Agent CLI
@@ -25,7 +25,7 @@ chmod +x ~/scripts/qa-agent-watcher.sh
 
 ## 2. Create the launchd plist
 
-Create a file at `~/Library/LaunchAgents/com.qa-agent-watcher.venguard.plist`:
+Create a file at `~/Library/LaunchAgents/com.qa-agent-watcher.myproject.plist`:
 
 ```xml
 <?xml version="1.0" encoding="UTF-8"?>
@@ -33,12 +33,12 @@ Create a file at `~/Library/LaunchAgents/com.qa-agent-watcher.venguard.plist`:
 <plist version="1.0">
 <dict>
     <key>Label</key>
-    <string>com.qa-agent-watcher.venguard</string>
+    <string>com.qa-agent-watcher.myproject</string>
 
     <key>ProgramArguments</key>
     <array>
-        <string>/Users/lewisharper/scripts/qa-agent-watcher.sh</string>
-        <string>/Users/lewisharper/Developer/Venguard</string>
+        <string>/Users/yourname/scripts/qa-agent-watcher.sh</string>
+        <string>/Users/yourname/Developer/MyProject</string>
     </array>
 
     <key>StartInterval</key>
@@ -53,10 +53,10 @@ Create a file at `~/Library/LaunchAgents/com.qa-agent-watcher.venguard.plist`:
     </dict>
 
     <key>StandardOutPath</key>
-    <string>/Users/lewisharper/logs/qa-agent-watcher-venguard.log</string>
+    <string>/Users/yourname/logs/qa-agent-watcher-myproject.log</string>
 
     <key>StandardErrorPath</key>
-    <string>/Users/lewisharper/logs/qa-agent-watcher-venguard.log</string>
+    <string>/Users/yourname/logs/qa-agent-watcher-myproject.log</string>
 
     <key>RunAtLoad</key>
     <true/>
@@ -73,7 +73,7 @@ mkdir -p ~/logs
 ## 4. Load the agent
 
 ```bash
-launchctl load ~/Library/LaunchAgents/com.qa-agent-watcher.venguard.plist
+launchctl load ~/Library/LaunchAgents/com.qa-agent-watcher.myproject.plist
 ```
 
 ## 5. Verify it's running
@@ -86,13 +86,13 @@ launchctl list | grep qa-agent-watcher
 
 ```bash
 # Stop it
-launchctl unload ~/Library/LaunchAgents/com.qa-agent-watcher.venguard.plist
+launchctl unload ~/Library/LaunchAgents/com.qa-agent-watcher.myproject.plist
 
 # Start it again
-launchctl load ~/Library/LaunchAgents/com.qa-agent-watcher.venguard.plist
+launchctl load ~/Library/LaunchAgents/com.qa-agent-watcher.myproject.plist
 
 # View logs
-tail -f ~/logs/qa-agent-watcher-venguard.log
+tail -f ~/logs/qa-agent-watcher-myproject.log
 ```
 
 ## Adding another repo
@@ -100,7 +100,7 @@ tail -f ~/logs/qa-agent-watcher-venguard.log
 1. Create a new plist with a different label and workspace path:
 
 ```bash
-cp ~/Library/LaunchAgents/com.qa-agent-watcher.venguard.plist \
+cp ~/Library/LaunchAgents/com.qa-agent-watcher.myproject.plist \
    ~/Library/LaunchAgents/com.qa-agent-watcher.otherproject.plist
 ```
 
