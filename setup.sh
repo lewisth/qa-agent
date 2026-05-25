@@ -37,6 +37,7 @@ ok "All prerequisites met."
 echo ""
 printf "${CYAN}Workspace path${NC} (absolute path to the repo the agent should watch):\n> "
 read -r WORKSPACE_PATH
+WORKSPACE_PATH="${WORKSPACE_PATH/#\~/$HOME}"
 
 if [ -z "$WORKSPACE_PATH" ] || [ ! -d "$WORKSPACE_PATH" ]; then
   fail "Directory does not exist: $WORKSPACE_PATH"
